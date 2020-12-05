@@ -16,10 +16,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 // ========================================
 let urlDB
 
-// if ( process.env.NODE_ENV === 'dev' )
-//     urlDB = 'mongodb://localhost:27017/cafe'
-// else
-    urlDB = 'mongodb+srv://admin:Cafe.2020@cluster0.h0btw.mongodb.net/cafe'
-    // urlDB = process.env.MONGO_URI
+if ( process.env.NODE_ENV === 'dev' )
+    urlDB = 'mongodb://localhost:27017/cafe'
+else
+    // urlDB = 'mongodb+srv://admin:Cafe.2020@cluster0.h0btw.mongodb.net/cafe'
+    urlDB = process.env.MONGO_URI
 
-process.env.NODE_ENV = urlDB
+process.env.URLDB = urlDB
