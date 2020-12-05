@@ -22,4 +22,4 @@ let urlDB
     urlDB = 'mongodb+srv://admin:Cafe.2020@cluster0.h0btw.mongodb.net/cafe'
     // urlDB = process.env.MONGO_URI
 
-process.env.MONGO_URI = urlDB
+process.env.NODE_ENV = urlDB
