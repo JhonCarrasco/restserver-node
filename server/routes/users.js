@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const _ = require('underscore')
 const User = require('../models/User')
-const { estimatedDocumentCount } = require('../models/User')
+const { verifyToken, verifyAdminRole } = require('../middlewares/authentication')
 const app = express()
 
 app.get('/', function (req, res) {
@@ -10,7 +10,11 @@ app.get('/', function (req, res) {
     res.json('Hello World')
 })
 
-app.get('/users', (req, res) => {
+app.get('/users', verifyToken, (req, res) => {
+
+
+
+
     // se considera como un rango inicial abierto, donde 'from = 5' ( [1,2,3,4,5[ -> 6,7,8...).
     // para controlar la cantidad por paginación
     let from = req.query.from || 0
@@ -41,7 +45,7 @@ app.get('/users', (req, res) => {
     })
 })
 
-app.post('/users', function (req, res) {
+app.post('/users', [verifyToken, verifyAdminRole], function (req, res) {
     let body = req.body
 
     let user = new User({
@@ -69,7 +73,7 @@ app.post('/users', function (req, res) {
 
 })
 
-app.put('/users/:id', function (req, res) {
+app.put('/users/:id', [verifyToken, verifyAdminRole], function (req, res) {
     let id = req.params.id
     // opciones de los atributos que se pueden modificar
     let body = _.pick(req.body, ['name','email','img','role','state'])
@@ -97,7 +101,7 @@ app.put('/users/:id', function (req, res) {
 
 })
 
-app.delete('/users/:id', function (req, res) {
+app.delete('/users/:id', [verifyToken, verifyAdminRole], function (req, res) {
     let id = req.params.id
     
     let changeState = {

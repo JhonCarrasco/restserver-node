@@ -12,6 +12,17 @@ process.env.PORT = process.env.PORT || 3000
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 
 // ========================================
+// TOKEN EXPIRATION
+// ========================================
+// 60 * 60 * 24 * 30 => 30 days
+process.env.TOKEN_EXPIRATION = 60 * 60 * 24 * 30
+
+// ========================================
+// AUTHENTICATION SEED
+// ========================================
+process.env.SEED = process.env.SEED || 'my-secret'
+
+// ========================================
 // DATA BASE
 // ========================================
 let urlDB
@@ -19,7 +30,6 @@ let urlDB
 if ( process.env.NODE_ENV === 'dev' )
     urlDB = 'mongodb://localhost:27017/cafe'
 else
-    // urlDB = 'mongodb+srv://admin:Cafe.2020@cluster0.h0btw.mongodb.net/cafe'
     urlDB = process.env.MONGO_URI
 
 process.env.URLDB = urlDB
