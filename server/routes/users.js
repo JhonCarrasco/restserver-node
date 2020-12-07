@@ -5,15 +5,12 @@ const User = require('../models/User')
 const { verifyToken, verifyAdminRole } = require('../middlewares/authentication')
 const app = express()
 
-app.get('/', function (req, res) {
-    //   res.send('Hello World')
-    res.json('Hello World')
-})
+// app.get('/', function (req, res) {
+//     //   res.send('Hello World')
+//     res.json('Hello World')
+// })
 
 app.get('/users', verifyToken, (req, res) => {
-
-
-
 
     // se considera como un rango inicial abierto, donde 'from = 5' ( [1,2,3,4,5[ -> 6,7,8...).
     // para controlar la cantidad por paginación

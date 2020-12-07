@@ -15,7 +15,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 // TOKEN EXPIRATION
 // ========================================
 // 60 * 60 * 24 * 30 => 30 days
-process.env.TOKEN_EXPIRATION = 60 * 60 * 24 * 30
+process.env.TOKEN_EXPIRATION = 60 * 60 * 24 * 30   // también '48H'
 
 // ========================================
 // AUTHENTICATION SEED
