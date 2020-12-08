@@ -42,7 +42,32 @@ let verifyAdminRole = (req, res, next) => {
 
 }
 
+// ========================================
+// VERIFY TOKEN FOR IMAGE
+// ========================================
+let verifyTokenImage = (req, res, next) => {
+    // obtener el parametro llamado 'token' donde viene el valor en la url petición
+    // example: {{url}}/image/users/5fcabd18e95c861d68d41c99-299.jpg?token=123456
+    let token = req.query.token
+
+    jwt.verify( token, process.env.SEED, (err, decode) => {
+        if (err)
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token no válido'
+                }
+            })
+
+        // dentro de decode (payload del token) viene el user
+        req.user = decode.user
+        next() 
+    })
+
+}
+
 module.exports = {
     verifyToken,
-    verifyAdminRole
+    verifyAdminRole,
+    verifyTokenImage
 }

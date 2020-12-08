@@ -109,7 +109,7 @@ app.delete('/users/:id', [verifyToken, verifyAdminRole], function (req, res) {
     User.findByIdAndUpdate( id, changeState, { new: true }, 
         (err, userDB) => {
             if (err) 
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             })
@@ -122,7 +122,7 @@ app.delete('/users/:id', [verifyToken, verifyAdminRole], function (req, res) {
 
             res.json({
                 ok: true,
-                userDB,
+                user: userDB
             })
         })
 
